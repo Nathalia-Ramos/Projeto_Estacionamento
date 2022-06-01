@@ -13,5 +13,19 @@
 require_once('conexaoMySql.php');
 
 //função para fazer o insert no BD
-function insertVeiculo()
+function insertVeiculo(){
+    
+}
+function updateVeiculo (){
+
+}
+function deleteVeiculo (){
+
+}
+function selectAllVeiculo(){
+
+}
+function selectByIdVeiculo(){
+
+}
 ?>
