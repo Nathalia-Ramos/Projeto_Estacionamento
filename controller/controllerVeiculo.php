@@ -12,16 +12,15 @@ function inserirVeiculo ($dadosVeiculo){
     //validação para verificar se o objeto está vazio
     if (!empty($dadosVeiculo)){
         //Validação de caixa vazia dos elementos nome celular e mail pois são obrigatoris no bd
-        if (!empty($dadosVeiculo['txtNome']) && !empty($dadosVeiculo['txtVeiculo']) && !empty($dadosVeiculo['txtPlaca'])){
+        if (!empty($dadosVeiculo['txtMarca']) && !empty($dadosVeiculo['txtPlaca'])){
 
         
             $arrayDados = array (
-                "nome"      => $dadosVeiculo['txtNome'],
-                "veiculo"  => $dadosVeiculo['txtVeiculo'],
+                "marca"  => $dadosVeiculo['txtMarca'],
                 "placa"   => $dadosVeiculo['txtPlaca']
             );
             //import arquivo de modelagem para manipular o BD
-            require_once('model/bd/veiculos.php.php');
+            require_once('model/bd/veiculos.php');
             //chama a função que fara o insert no BD (está função está na model)
             if (insertVeiculo($arrayDados))
             return true;
@@ -43,20 +42,19 @@ function atualizarVeiculo ($dadosVeiculo, $arrayDados){
     $id = $arrayDados['id'];
      //validação para verificar se o objeto está vazio
      if (!empty($dadosVeiculo)){
-        //Validação de caixa vazia dos elementos nome celular e mail pois são obrigatoris no bd
-        if (!empty($dadosVeiculo['txtNome']) && !empty($dadosVeiculo['txtVeiculo']) && !empty($dadosVeiculo['txtPlaca'])){
+    
+        if (!empty($dadosVeiculo['txtVeiculo']) && !empty($dadosVeiculo['txtPlaca'])){
             //validação para garantir que o id seja valido
             if(!empty($id) && $id !=0 && is_numeric($id)){
           
             $arrayDados = array (
                 "id"        => $id,
-                "nome"      => $dadosVeiculo['txtNome'],
                 "veiculo"  => $dadosVeiculo['txtVeiculo'],
                 "placa"   => $dadosVeiculo['txtPlaca'],
         
             );
             //import arquivo de modelagem para manipular o BD
-            require_once('model/bd/veiculos.php.php');
+            require_once('model/bd/veiculos.php');
             //chama a função que fara o insert no BD (está função está na model)
                 if (updateVeiculo($arrayDados)){
                     return true;
