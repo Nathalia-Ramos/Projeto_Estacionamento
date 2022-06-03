@@ -163,5 +163,22 @@ function pullingId(){
 
     //Executa o script sql no BD e guarda o retorno dos dados, se houver 
     $result = mysqli_query($conexao, $selectId);
+
+    if($result){
+        //mysqli_fetch_assoc() - permite converter os dados do BD em array de manipulação no PHP
+        //Nesta, repetição estamos, convertendo os dados do BD em um Array ($rsDados) , além de
+        // o proprio while conseguir gerenciar a quantidade de vezes que deverá ser feita a repetição
+        
+        if($rsDados = mysqli_fetch_assoc($result)){
+            //Criar um array com os dados BD
+                $arrayDados = array(
+                    "id"       => $rsDados['id']
+                );
+         }
+            //solicita o fechamento da conexão com o BD
+            fecharConexaoMySql($conexao);
+
+            return $arrayDados;
+    }
 }
 ?>

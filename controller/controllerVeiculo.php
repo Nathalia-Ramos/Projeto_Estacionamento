@@ -94,7 +94,7 @@ function listarVeiculo (){
     //import do arquivo que vai buscar os dados no BD
     require_once('model/bd/veiculos.php');
     //chama a função que vai buscar os dados no BD
-    $dados = selectAllVeiculo();
+    $dados = pullingId();
     
     if(!empty($dados))
     return $dados;

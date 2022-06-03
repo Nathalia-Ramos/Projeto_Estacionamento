@@ -152,20 +152,39 @@ function selectByIdCliente($id){
                  return $arrayDados;
          }
 }
-
-function settingId($result, $dadosCliente, $selectId){
+function settingId($result, $dadosCliente){
 
     //Abre as conexão com o BD
     $conexao = conexaoMysql();
 
     $sql = "insert into tbl veiculo
             (nome,
-        idVeiculo
-        )
+            idVeiculo
+            )
         values
         ('".$dadosCliente['nome']."',
-        '".$selectId."');";
+        '".$result."');";
 
-    
+    //executa o script no BD
+    //Validação para verificar  se o script sql esta correto
+    if(mysqli_query($conexao, $sql))
+    {
+        //validação para ver se al inha for gravada no bd 
+        if(mysqli_affected_rows($conexao))
+        {
+            fecharConexaoMySql($conexao);
+            $statusResposta = true;
+            }
+            else{
+                fecharConexaoMySql($conexao);
+                $statusResposta = false;
+            }
+        }else{
+            fecharConexaoMySql($conexao);
+            $statusResposta = false;
+        }
+
+        fecharConexaoMySql($conexao);
+        return $statusResposta;
 }
 ?>

@@ -11,19 +11,9 @@
 
     $listVeiculo = listarVeiculo();
 
-    foreach ($listVeiculo as $item){
-        ?>
-        <tr id="tblLinhas">
-            <td class="tblColunas registros">
-                <?= $item['placa']?>
-            </td>
-            <td class="tblColunas registros">
-                <?= $item['marca']?>
-            </td>
-        </tr>
-        <?php
-    }
 
-    ?>
+    var_dump($listVeiculo);
+        ?>
+    
 </body>
 </html>
