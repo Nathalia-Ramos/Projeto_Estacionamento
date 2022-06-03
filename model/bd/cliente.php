@@ -11,6 +11,7 @@
 
 //import
 require_once('conexaoMySql.php');
+require_once('veiculos.php');
 
 //função para fazer o insert no BD
 function insertCliente($dadosCliente){
@@ -150,5 +151,21 @@ function selectByIdCliente($id){
      
                  return $arrayDados;
          }
+}
+
+function settingId($result, $dadosCliente, $selectId){
+
+    //Abre as conexão com o BD
+    $conexao = conexaoMysql();
+
+    $sql = "insert into tbl veiculo
+            (nome,
+        idVeiculo
+        )
+        values
+        ('".$dadosCliente['nome']."',
+        '".$selectId."');";
+
+    
 }
 ?>
