@@ -15,37 +15,44 @@ require_once('veiculos.php');
 
 //função para fazer o insert no BD
 function insertCliente($dadosCliente){
-      //abre a conexão com o BD
-      $conexao = conexaoMysql();
-      $sql = "insert into tblveiculo
-          (nome
-        )
-      values
-      (
-      '".$dadosCliente['nome']."');";
+
+    
+    //Abre as conexão com o BD
+    $conexao = conexaoMysql();
+
+    $veiculoId = pullingId()["id"];
+
+    
+
+    $sql = "insert into tblcliente
+            (nome,
+            idVeiculo
+            )
+        values
+        ('".$dadosCliente['nome']."',
+        '".$veiculoId."');";
+
+    //executa o script no BD
+    //Validação para verificar  se o script sql esta correto
+    if(mysqli_query($conexao, $sql))
+    {
+        //validação para ver se al inha for gravada no bd 
+        if(mysqli_affected_rows($conexao))
+        {
+        
+            $statusResposta = true;
+            }
+            else{
+        
+                $statusResposta = false;
+            }
+        }else{
   
-     
-      //executa o script no BD
-          //Validação para verificar  se o script sql esta correto
-      if(mysqli_query($conexao, $sql))
-      {
-          //validação para ver se al inha for gravada no bd 
-          if(mysqli_affected_rows($conexao))
-          {
-              fecharConexaoMySql($conexao);
-              $statusResposta = true;
-              }
-              else{
-                  fecharConexaoMySql($conexao);
-                  $statusResposta = false;
-              }
-          }else{
-              fecharConexaoMySql($conexao);
-              $statusResposta = false;
-          }
-  
-          fecharConexaoMySql($conexao);
-          return $statusResposta;
+            $statusResposta = false;
+        }
+
+        fecharConexaoMySql($conexao);
+        return $statusResposta;
 }
 function updateCliente ($dadosCliente){
     $statusResposta =(boolean) false;
@@ -152,39 +159,5 @@ function selectByIdCliente($id){
                  return $arrayDados;
          }
 }
-function settingId($result, $dadosCliente){
 
-    //Abre as conexão com o BD
-    $conexao = conexaoMysql();
-
-    $sql = "insert into tbl veiculo
-            (nome,
-            idVeiculo
-            )
-        values
-        ('".$dadosCliente['nome']."',
-        '".$result."');";
-
-    //executa o script no BD
-    //Validação para verificar  se o script sql esta correto
-    if(mysqli_query($conexao, $sql))
-    {
-        //validação para ver se al inha for gravada no bd 
-        if(mysqli_affected_rows($conexao))
-        {
-            fecharConexaoMySql($conexao);
-            $statusResposta = true;
-            }
-            else{
-                fecharConexaoMySql($conexao);
-                $statusResposta = false;
-            }
-        }else{
-            fecharConexaoMySql($conexao);
-            $statusResposta = false;
-        }
-
-        fecharConexaoMySql($conexao);
-        return $statusResposta;
-}
 ?>

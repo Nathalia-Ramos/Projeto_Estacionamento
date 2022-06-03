@@ -10,7 +10,7 @@
 const SERVER = 'localhost';
 const USER = 'root';
 const PASSWORD = 'bcd127';
-const DATABASE = 'dbEstacionamento';
+const DATABASE = 'dbestacionamento';
 //abre a conexao com o banco de dados mysql
 function conexaoMysql(){
     $conexao = array();
@@ -20,7 +20,11 @@ function conexaoMysql(){
 
     //Validação para verificar se a conexão foi realizada com sucesso
     if($conexao){
+
         return $conexao;
+
+        var_dump($conexao);
+        die;
     }else{
         return false;
     }

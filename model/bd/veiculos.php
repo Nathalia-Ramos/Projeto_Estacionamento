@@ -11,6 +11,7 @@
 
 //import
 require_once('conexaoMySql.php');
+require_once('conexaoMySql.php');
 require_once('cliente.php');
 
 //função para fazer o insert no BD
@@ -19,34 +20,34 @@ function insertVeiculo($dadosVeiculo){
       $conexao = conexaoMysql();
       $sql = "insert into tblveiculo
           (placa,
-          marca,
+          marca
         )
       values
       ('".$dadosVeiculo['placa']."',
       '".$dadosVeiculo['marca']."');";
-  
-     
+    
       //executa o script no BD
           //Validação para verificar  se o script sql esta correto
       if(mysqli_query($conexao, $sql))
       {
+        
           //validação para ver se al inha for gravada no bd 
           if(mysqli_affected_rows($conexao))
           {
-              fecharConexaoMySql($conexao);
-              $statusRespota = true;
+              
+              $statusResposta = true;
               }
               else{
-                  fecharConexaoMySql($conexao);
-                  $statusRespota = false;
+                  
+                  $statusResposta = false;
               }
           }else{
-              fecharConexaoMySql($conexao);
-              $statusRespota = false;
+             
+              $statusResposta = false;
           }
   
           fecharConexaoMySql($conexao);
-          return $statusRespota;
+          return $statusResposta;
 }
 function updateVeiculo ($dadosVeiculo){
     $statusResposta =(boolean) false;

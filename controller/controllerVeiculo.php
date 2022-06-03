@@ -8,33 +8,52 @@
  * 
  *********************************************/
 
-function inserirVeiculo ($dadosVeiculo){
-    //validação para verificar se o objeto está vazio
-    if (!empty($dadosVeiculo)){
-        //Validação de caixa vazia dos elementos nome celular e mail pois são obrigatoris no bd
-        if (!empty($dadosVeiculo['txtMarca']) && !empty($dadosVeiculo['txtPlaca'])){
+function inserirCliente ($dadosVeiculo, $dadosCliente){
 
-        
-            $arrayDados = array (
-                "marca"  => $dadosVeiculo['txtMarca'],
-                "placa"   => $dadosVeiculo['txtPlaca']
-            );
-            //import arquivo de modelagem para manipular o BD
-            require_once('model/bd/veiculos.php');
-            //chama a função que fara o insert no BD (está função está na model)
-            if (insertVeiculo($arrayDados))
-            return true;
-            else
-            return array('idErro' => 1,
-                        'message' => 'Não foi possivel inserir os dados no banco de dados');
+    require_once 'model/bd/cliente.php';
+    require_once 'model/bd/veiculos.php';
+    //verifica se esta vazio
+    
+
+        $arrayD = array (
+            "nome"  => $dadosCliente['txtNome']
+        );
+        $arrayDados = array (
             
+            "marca" => $dadosVeiculo['txtMarca'],
+            "placa" => $dadosVeiculo['txtPlaca']
+        );
+        
+    
+        //verificando se esta vindo o ID
+        if(insertVeiculo($arrayDados)){
+          
+            var_dump($arrayD);
+            die;
+
+                if(pullingId()){
+                 
+                   
+                    if(insertCliente($arrayD)){
+                       
+                        
+
+                        return true;
+                    
+
+                    }return array('idErro' => 5,
+                    'message' => 'Não foi possivel inserir o cliente');
+                }return array('idErro' => 4,
+                'message' => 'Veiculo não encontrado');
+  
+
         }
-        //Função para receber dados de view e encaminhar paara a model (atualizar)
-        else{
-            return array('idErro' => 2,
-                        'message' => 'Existem campos obrigatorios que não foram preenchdidos');
-        }
-    }
+        
+        return array('idErro' => 2,
+        'message' => 'dados do veiculo inválido');
+        
+
+
     
 }
 function atualizarVeiculo ($dadosVeiculo, $arrayDados){
@@ -92,9 +111,9 @@ function excluirVeiculo ($arrayDados){
 }
 function listarVeiculo (){
     //import do arquivo que vai buscar os dados no BD
-    require_once('model/bd/veiculos.php');
+    require_once('model/bd/cliente.php');
     //chama a função que vai buscar os dados no BD
-    $dados = pullingId();
+    $dados = selectAllCliente();
     
     if(!empty($dados))
     return $dados;
@@ -120,4 +139,5 @@ function buscarVeiculo($id){
        return array('idErro' => 4, 'message' => 'não é possivel buscar um registro sem informar um id válido');
    }
 }
+
 ?>
