@@ -2,11 +2,13 @@
 /******************************************
  * Objetivos Arquivo reponsavel pela manipulção de dados contaveis
  *  Obs (Este arquivo fara a ponte entre a view e a Model)
- * Autor:Leonardo
+ * Autor:Nathalia
  * Data:01/06/2022
  * Versão: 1.0
  * 
  *********************************************/
+
+require_once(SRC.'./modulo/config.php');
 
 function inserirCliente ($dadosVeiculo, $dadosCliente){
 
@@ -23,8 +25,9 @@ function inserirCliente ($dadosVeiculo, $dadosCliente){
             "marca" => $dadosVeiculo['txtMarca'],
             "placa" => $dadosVeiculo['txtPlaca']
         );
-        
-    
+
+        require_once(SRC.'model/bd/veiculos.php');
+   
         //verificando se esta vindo o ID
         if(insertVeiculo($arrayDados)){
           
@@ -111,20 +114,20 @@ function excluirVeiculo ($arrayDados){
 }
 function listarVeiculo (){
     //import do arquivo que vai buscar os dados no BD
-    require_once('model/bd/cliente.php');
+    require_once('./model/bd/cliente.php');
     //chama a função que vai buscar os dados no BD
     $dados = selectAllCliente();
     
     if(!empty($dados))
-    return $dados;
+        return $dados;
     else
-    return false;
-}
+         return false;
+}   
 function buscarVeiculo($id){
     //validação para verificar se o id contem um numero valido
     if($id != 0 && !empty($id) && is_numeric($id)){
         //import do arquivo de contato
-       require_once('model/bd/veiculos.php');
+       require_once('SRC./model/bd/veiculos.php');
 
        //chama a função na model que vai buscar o BD
        $dados = selectByIdVeiculo($id);

@@ -102,6 +102,7 @@ function deleteVeiculo ($id){
      return $statusResposta;
 }
 function selectAllVeiculo(){
+        
         //Abre as conexão com o BD
         $conexao = conexaoMysql();
         //Script para listar todos os dados no BD
